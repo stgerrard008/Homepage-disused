@@ -119,20 +119,22 @@ a:hover {
 }
 #header h2 {
   font-weight: normal;
-  font-size: 0.9em;
+  font-size: 1.2em;
   line-height: 1;
   margin-top: 10px;
 }
 #header #main-nav {
   font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
   line-height: 2.5em;
+  margin-top: 30px;
 }
 #header #main-nav ul {
   list-style: none;
 }
-#header #main-nav ul li {
+#header #main-nav li {
   float: left;
   margin-left: 30px;
+  font-size: 1.8em;
 }
 article {
   -webkit-box-shadow: 1px 2px 3px #ddd;
@@ -615,12 +617,12 @@ article footer .addthis iframe {
 }
 #sidebar .widget .title {
   padding: 15px 20px;
-  font-size: 1em;
+  font-size: 1.2em;
   border-bottom: 1px solid #ddd;
   font-weight: normal;
 }
 #sidebar .widget .entry {
-  font-size: 0.9em;
+  font-size: 1em;
   padding: 15px 20px;
 }
 #sidebar .widget ul,
