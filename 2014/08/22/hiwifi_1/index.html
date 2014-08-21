@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>About Me | GNosis Storm</title>
+  <title>Compile the HiWiFi System | GNosis Storm</title>
   <meta name="author" content="Chen Zhuo">
   
   <meta name="description" content="A Philobiblic Programmer&#39;s Inner Space">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="About Me"/>
+  <meta property="og:title" content="Compile the HiWiFi System"/>
   <meta property="og:site_name" content="GNosis Storm"/>
 
   
@@ -35,79 +35,66 @@
 <nav id="main-nav" class="alignright">
   <ul>
     
-      <li><a href="/">Home</a></li>
+      <li><a href="/">Blog</a></li>
     
       <li><a href="/archives">Archives</a></li>
     
-      <li><a href="/about_me">About Me</a></li>
+      <li><a href="/about">About</a></li>
     
   </ul>
   <div class="clearfix"></div>
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
+        <div class="icon"></div>
+        <time datetime="2014-08-21T16:28:30.000Z"><a href="/2014/08/22/hiwifi_1/">Aug 22 2014</a></time>
+      
       
   
-    <h1 class="title">About Me</h1>
+    <h1 class="title">Compile the HiWiFi System</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="Personal">Personal</h2>
+        <p>Recently I got a HiWiFi on which I attempted to accomplish some function. HiWiFi, a wireless network manager that provides automatic connection to WLAN and open hotspots, can be considered as a smart router in brief. The system of HiWiFi is based on an open source project OpenWrt which I arrange to expound in later articles. In the rest of this article, I will detail the steps how to compile the source code of HiWiFi embedded system instead of OpenWrt.<a id="more"></a></p>
+<p><strong><em>Tip:</em></strong> HiWiFi 1 remains the only version within HiWiFi series that support OpenWrt, even though the HiWiFi system is developed on OpenWrt.</p>
+<h2 id="Preparation">Preparation</h2>
+<p>I assume that your current OS is <em>Ubuntu 14.04 TSL</em> or other Linux systems. Otherwise, you should know what will you do immediately.</p>
 <ul>
-<li>Chen Zhuo(Stanley)</li>
-<li>509 Building 14, Tsinghua University,<br>Haidian District, Beijing, 100084, P.R.China</li>
+<li>To prepare for the environment, some tools is necessary, the installation may be duck soup for you:</li>
 </ul>
-<h2 id="Education">Education</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo apt-<span class="built_in">get</span> install -<span class="keyword">y</span> build-essential gcc <span class="keyword">g</span>++ binutils patch bzip2 flex bison <span class="keyword">make</span> autoconf gettext texinfo unzip sharutils subversion git git-core libncurses5-dev ncurses-term zlib1g-dev gawk</div></pre></td></tr></table></figure>
+
 <ul>
-<li><p>Tsinghua University, P.R.China (Aug.2013 - now)</p>
-<ul>
-<li>Candidate, Master of Science in Software Engineering</li>
-<li>Institue of Trustworthy Network and Systems, School of Software</li>
-<li>Supervisor: <a href="http://www.cse.ust.hk/~liu/" target="_blank" rel="external">Yunhao Liu</a></li>
+<li>With the first step done, we shall get access to the source code from the official website using SVN, and update the software installation package:</li>
 </ul>
-</li>
-<li><p>Tsinghua University, P.R.China (Aug.2009 - July.2013)</p>
-<ul>
-<li>Bachelor of Engineering</li>
-<li>School of Software</li>
-</ul>
-</li>
-</ul>
-<h2 id="ABILITIES">ABILITIES</h2>
-<h3 id="Programming_Languages">Programming Languages</h3>
-<ul>
-<li>JAVA, C/C++, C#, Python, Matlab</li>
-</ul>
-<h3 id="Operating_Systems">Operating Systems</h3>
-<ul>
-<li>Unix/Linux, Windows</li>
-</ul>
-<h3 id="Web">Web</h3>
-<ul>
-<li>HTML, PHP, ASP.Net, Node.js</li>
-</ul>
-<h3 id="Tools">Tools</h3>
-<ul>
-<li>SVN, Git, LaTeX</li>
-</ul>
-<h2 id="Experience">Experience</h2>
-<p>waiting for completion…</p>
-<h2 id="Contact">Contact</h2>
-<p><a href="mailto:chenzhuo091@gmail.com" target="_blank" rel="external"><img src="http://chenzhuo-me-homepage.qiniudn.com/icon-48-gmail.png" class="nofancybox"></a>    <a href="https://www.facebook.com/profile.php?id=100000994848525" target="_blank" rel="external"><img src="http://chenzhuo-me-homepage.qiniudn.com/icon-48-facebook.png" class="nofancybox"></a>    <a href="https://twitter.com/stgerrard008" target="_blank" rel="external"><img src="http://chenzhuo-me-homepage.qiniudn.com/icon-48-twitter.png" class="nofancybox"></a>    <a href="https://github.com/stgerrard008" target="_blank" rel="external"><img src="http://chenzhuo-me-homepage.qiniudn.com/icon-48-github.png" class="nofancybox"></a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$svn <span class="keyword">co</span> http<span class="variable">s:</span>//code.hiwifi.<span class="keyword">com</span>/svn/hiwifi</div><div class="line">$<span class="keyword">cd</span> hiwifi/trunk</div><div class="line">$./scripts/feeds <span class="keyword">update</span> -<span class="keyword">a</span></div><div class="line">$./scripts/feeds install -<span class="keyword">a</span></div></pre></td></tr></table></figure>
+
+<p>You would be asked to input the account of HiWiFi Forum in the process. Please go ahead to this site <em><a href="https://user.hiwifi.com/register" target="_blank" rel="external">user.hiwifi.com</a></em> for an account if you haven’t had it.</p>
+<h2 id="Compiling">Compiling</h2>
 
       
     </div>
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/router/">router</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/hiwifi/">hiwifi</a>, <a href="/tags/router/">router</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -157,6 +144,8 @@
   
     <li><a href="/categories/others/">others</a><small>1</small></li>
   
+    <li><a href="/categories/router/">router</a><small>1</small></li>
+  
   </ul>
 </div>
 
@@ -165,6 +154,10 @@
 <div class="widget tag">
   <h3 class="title">Tags</h3>
   <ul class="entry">
+  
+    <li><a href="/tags/hiwifi/">hiwifi</a><small>1</small></li>
+  
+    <li><a href="/tags/router/">router</a><small>1</small></li>
   
     <li><a href="/tags/welcome/">welcome</a><small>1</small></li>
   
@@ -176,6 +169,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2014/08/22/hiwifi_1/">Compile the HiWiFi System</a>
+      </li>
     
       <li>
         <a href="/2014/08/20/welcome/">Welcome to my site</a>
