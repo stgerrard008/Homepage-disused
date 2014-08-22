@@ -63,9 +63,11 @@
     <div class="entry">
       
         <p>Recently I got a HiWiFi on which I attempted to accomplish some function. HiWiFi, a wireless network manager that provides automatic connection to WLAN and open hotspots, can be considered as a smart router in brief. The system of HiWiFi is based on an open source project OpenWrt which I arrange to expound in later articles. In the rest of this article, I will detail the steps how to compile the source code of HiWiFi embedded system instead of OpenWrt.<a id="more"></a></p>
-<p><strong><em>Tip:</em></strong> HiWiFi 1 remains the only version within HiWiFi series that support OpenWrt, even though the HiWiFi system is developed on OpenWrt.</p>
-<h2 id="Preparation">Preparation</h2>
-<p>I assume that your current OS is <em>Ubuntu 14.04 TSL</em> or other Linux systems. Otherwise, you should know what will you do immediately.</p>
+<p><strong><em>Tip:</em></strong> HiWiFi one(HC6361) remains the only version within HiWiFi series that support OpenWrt, even though the HiWiFi system is developed on OpenWrt.</p>
+<h2 id="Prerequisites">Prerequisites</h2>
+<p>I assume that your current OS is <em>Ubuntu 14.04 TSL</em> or other Linux systems. Otherwise, you should know what should you do immediately.</p>
+<p><em><a href="http://www.ubuntu.com/" target="_blank" rel="external">Ubuntu Download</a></em><br><em><a href="http://www.centos.org/" target="_blank" rel="external">CentOS Download</a></em><br><em><a href="http://fedoraproject.org/" target="_blank" rel="external">Fedora Download</a></em></p>
+<h1 id="Environment">Environment</h1>
 <ul>
 <li>To prepare for the environment, some tools is necessary, the installation may be duck soup for you:</li>
 </ul>
@@ -76,8 +78,26 @@
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$svn <span class="keyword">co</span> http<span class="variable">s:</span>//code.hiwifi.<span class="keyword">com</span>/svn/hiwifi</div><div class="line">$<span class="keyword">cd</span> hiwifi/trunk</div><div class="line">$./scripts/feeds <span class="keyword">update</span> -<span class="keyword">a</span></div><div class="line">$./scripts/feeds install -<span class="keyword">a</span></div></pre></td></tr></table></figure>
 
-<p>You would be asked to input the account of HiWiFi Forum in the process. Please go ahead to this site <em><a href="https://user.hiwifi.com/register" target="_blank" rel="external">user.hiwifi.com</a></em> for an account if you haven’t had it.</p>
-<h2 id="Compiling">Compiling</h2>
+<p>You would be asked to input the account of HiWiFi Forum in the process. Please turn to this website <em><a href="https://user.hiwifi.com/register" target="_blank" rel="external">user.hiwifi.com</a></em> for an account if you haven’t had one.</p>
+<h2 id="Procedure">Procedure</h2>
+<ul>
+<li>As the preparatory work is completed, we try to start the build. This work will automatically compile the OpenWrt Buildroot menuconfig, the configuration interface that handles the selection of the target platform, packages to be compiled, packages to be included in the firmware file and some kernel options, etc.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> <span class="keyword">package</span>/symlinks</div><div class="line"><span class="variable">$make</span> menuconfig</div></pre></td></tr></table></figure>
+
+<ul>
+<li>Please select the plug-ins that of use in your target platform and then build the image. The build process can be accelerated by running multiple concurrent job processes using <em>-j-option</em></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> HC6361_defconfig</div><div class="line"><span class="variable">$make</span> -j <span class="number">4</span></div></pre></td></tr></table></figure>
+
+<p>If for some reason the build fails, the way to spot the error is adding <em>V=s</em> to monitor:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> V=s -j <span class="number">4</span></div></pre></td></tr></table></figure>
+
+<p>After a successful build the image can be found in a newly created directory <em>/bin</em>.</p>
+<h2 id="Note">Note</h2>
+<ul>
+<li>If you are a developer, The HiWiFi Develpment Wiki might be helpful <em><a href="https://code.hiwifi.com" target="_blank" rel="external">code.hiwifi.com</a></em></li>
+</ul>
 
       
     </div>
@@ -92,7 +112,7 @@
         
   
   <div class="tags">
-    <a href="/tags/hiwifi/">hiwifi</a>, <a href="/tags/router/">router</a>
+    <a href="/tags/hiwifi/">hiwifi</a>, <a href="/tags/smart-router/">smart router</a>, <a href="/tags/compile/">compile</a>
   </div>
 
         
@@ -155,9 +175,13 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
+    <li><a href="/tags/compile/">compile</a><small>1</small></li>
+  
     <li><a href="/tags/hiwifi/">hiwifi</a><small>1</small></li>
   
-    <li><a href="/tags/router/">router</a><small>1</small></li>
+    <li><a href="/tags/router/">router</a><small>0</small></li>
+  
+    <li><a href="/tags/smart-router/">smart router</a><small>1</small></li>
   
     <li><a href="/tags/welcome/">welcome</a><small>1</small></li>
   
