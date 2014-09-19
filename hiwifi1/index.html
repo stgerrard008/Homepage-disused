@@ -74,11 +74,20 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo apt-<span class="built_in">get</span> install -<span class="keyword">y</span> build-essential gcc <span class="keyword">g</span>++ binutils patch bzip2 flex bison <span class="keyword">make</span> autoconf gettext texinfo unzip sharutils subversion git git-core libncurses5-dev ncurses-term zlib1g-dev gawk</div></pre></td></tr></table></figure>
 
 <ul>
-<li>With the first step done, we shall get access to the source code from the official website using SVN, and update the software installation package:</li>
+<li>With the first step done, we shall get access to the source code from the official website using SVN</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$svn <span class="keyword">co</span> http<span class="variable">s:</span>//code.hiwifi.<span class="keyword">com</span>/svn/hiwifi</div><div class="line">$<span class="keyword">cd</span> hiwifi/trunk</div><div class="line">$./scripts/feeds <span class="keyword">update</span> -<span class="keyword">a</span></div><div class="line">$./scripts/feeds install -<span class="keyword">a</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$svn <span class="keyword">co</span> http<span class="variable">s:</span>//code.hiwifi.<span class="keyword">com</span>/svn/hiwifi</div></pre></td></tr></table></figure>
 
 <p>You would be asked to input the account of HiWiFi Forum in the process. Please turn to this website <em><a href="https://user.hiwifi.com/register" target="_blank" rel="external">user.hiwifi.com</a></em> for an account if you haven’t had one.</p>
+<p>-Next, update the software installation package:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$cd</span> hiwifi/trunk</div><div class="line">$./scripts/feeds update <span class="operator">-a</span></div></pre></td></tr></table></figure>
+
+<p>However, you may encounter a problem while downloading the <strong>“x-wrt”</strong> source code from <em>code.google.com</em> under the obstruction of GFW. Proxy and VPN can help solving it. Yet, you can also find the <strong>xwrt</strong> folder from my <a href="https://github.com/stgerrard008/OpenWRT-missing-file" target="_blank" rel="external">Github</a> and put it into the folder <strong>“./feeds”</strong> and create the file <strong><em>xwrt.index</em></strong> with simple text:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xwrt.tmp/.packageinfo</div></pre></td></tr></table></figure>
+
+<p>-Then retry the update command and you will find that <strong><em>xwrt.index</em></strong> was modified, which suggests running the installation command:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$./scripts/feeds install <span class="operator">-a</span></div></pre></td></tr></table></figure>
+
 <h2 id="Procedure">Procedure</h2>
 <ul>
 <li>As the preparatory work is completed, we try to start the build. This work will automatically compile the OpenWrt Buildroot menuconfig, the configuration interface that handles the selection of the target platform, packages to be compiled, packages to be included in the firmware file and some kernel options, etc.</li>
@@ -86,14 +95,20 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> <span class="keyword">package</span>/symlinks</div><div class="line"><span class="variable">$make</span> menuconfig</div></pre></td></tr></table></figure>
 
 <ul>
-<li>Please select the plug-ins that of use in your target platform and then build the image. The build process can be accelerated by running multiple concurrent job processes using <em>-j-option</em></li>
+<li>Please select the plug-ins that of use in your target platform and then build the image. The build process can be accelerated by running multiple concurrent job processes using <em>-j</em></li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> HC6361_defconfig</div><div class="line"><span class="variable">$make</span> -j <span class="number">4</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> HC6361_defconfig</div><div class="line"><span class="variable">$make</span> -j</div></pre></td></tr></table></figure>
 
 <p>If for some reason the build fails, the way to spot the error is adding <em>V=s</em> to monitor:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> V=s -j <span class="number">4</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$make</span> V=s -j</div></pre></td></tr></table></figure>
 
 <p>After a successful build the image can be found in a newly created directory <em>/bin</em>.</p>
+<p><strong><em>Tip:</em></strong> As the site <em>code.google.com</em> is blocked in Mainland China, the packages <strong>hotplug2</strong> and <strong>opkg</strong> will lead to the failure. The solution is to directly  download the <strong>tar.gz</strong> files, which I provide on my <a href="https://github.com/stgerrard008/OpenWRT-missing-file" target="_blank" rel="external">Github</a>, and put them into the folder <strong>“./dl”</strong>.</p>
+<h2 id="Ending_Work">Ending Work</h2>
+<p>-The last step is to generate the <strong>recovery.bin</strong>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd <span class="variable">if=</span>rom.bin <span class="variable">of=</span>uboot.bin <span class="variable">bs=</span><span class="number">1</span>k <span class="variable">count=</span><span class="number">128</span></div><div class="line">cat uboot.bin bin/ar71xx/openwrt-ar71xx-generic-tw150v1-squashfs-sysupgrade.bin &gt;recovery.bin</div></pre></td></tr></table></figure>
+
+<p>After all, you can find the <strong>recovery.bin</strong> in current folder.</p>
 <h2 id="Note">Note</h2>
 <ul>
 <li>If you are a developer, The HiWiFi Develpment Wiki might be helpful <em><a href="https://code.hiwifi.com" target="_blank" rel="external">code.hiwifi.com</a></em></li>
@@ -156,19 +171,11 @@
 
 
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/compile/">compile</a><small>1</small></li>
-  
-    <li><a href="/tags/hiwifi/">hiwifi</a><small>1</small></li>
-  
-    <li><a href="/tags/smart-router/">smart router</a><small>1</small></li>
-  
-    <li><a href="/tags/welcome/">welcome</a><small>1</small></li>
-  
-  </ul>
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/compile/" style="font-size: NaNpx;">compile</a><a href="/tags/hiwifi/" style="font-size: NaNpx;">hiwifi</a><a href="/tags/smart-router/" style="font-size: NaNpx;">smart router</a><a href="/tags/welcome/" style="font-size: NaNpx;">welcome</a>
+  </div>
 </div>
 
 
