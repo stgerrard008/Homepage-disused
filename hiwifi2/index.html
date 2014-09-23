@@ -70,27 +70,27 @@
 <p>4.Create a new folder <strong>/src</strong> to place your source code, and a new file <strong>Makefile</strong> which will be of great importance later.  </p>
 <p>5.Put all your source code on the <strong>./package/[project-name]/src/</strong> directory. In this article, I create a file “listener.c”.  </p>
 <p>6.We come to a key step to generate the <strong>Makefile</strong> for this project. If it is easy for you, please skip this step.  </p>
-<p> 6.1.Generate the file <strong>configure.scan</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6.1.Generate the file <strong>configure.scan</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>autoscan</div></pre></td></tr></table></figure>
 
 
-<p> 6.2.Rename this file to <strong>configure.in</strong> and modify the content as follow:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6.2.Rename this file to <strong>configure.in</strong> and modify the content as follow:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor"># -*- Autoconf -*-</span></div><div class="line"><span class="preprocessor"># Process this file with autoconf to produce a configure script.</span></div><div class="line">AC_INIT(listener.c)</div><div class="line">AM_INIT_AUTOMAKE(listener, <span class="number">1.0</span>)</div><div class="line"><span class="preprocessor"># Checks for programs.</span></div><div class="line">AC_PROG_CC</div><div class="line"><span class="preprocessor"># Checks for libraries.</span></div><div class="line"><span class="preprocessor"># Checks for header files.</span></div><div class="line"><span class="preprocessor"># Checks for typedefs, structures, and compiler characteristics.</span></div><div class="line"><span class="preprocessor"># Checks for library functions.</span></div><div class="line">AC_OUTPUT(Makefile)</div></pre></td></tr></table></figure>
 
 
-<p> 6.3.Get files <strong>aclocal.m4</strong> and <em>**configure</em></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6.3.Get files <strong>aclocal.m4</strong> and <em>**configure</em></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>aclocal</div><div class="line"><span class="variable">$ </span>autoconf</div></pre></td></tr></table></figure>
 
 
-<p> 6.4.Create a new file <strong>Makefile.am</strong>, and modify the content as follow:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6.4.Create a new file <strong>Makefile.am</strong>, and modify the content as follow:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">AUTOMAKE_OPTIONS=</span>foreign</div><div class="line"><span class="variable">bin_PROGRAMS=</span>listener</div><div class="line"><span class="variable">listener_SOURCES=</span>listener.c</div></pre></td></tr></table></figure>
 
 
-<p> 6.5.Get file <strong>Makefile.in</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6.5.Get file <strong>Makefile.in</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ automake --<span class="built_in">add</span>-missing</div></pre></td></tr></table></figure>
 
 
-<p> 6.6.Generate the <strong>Makefile</strong> and compile the project</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;6.6.Generate the <strong>Makefile</strong> and compile the project</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>./configure</div><div class="line"><span class="variable">$ </span>make</div></pre></td></tr></table></figure>
 
 <p>Then you can take a glance at the directory hierarchy which lists as:<br>&nbsp;&nbsp;&nbsp;&nbsp;|——package/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;|——listener/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;|——src/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——aclocal.m4<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——configure<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——configure.in<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——listener.c<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——listener.o<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——listener<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——Makefile.in<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——Makefile.am<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|——Makefile<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;| &nbsp;&nbsp;|——Makefile<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;|——Makefile<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;|——rules.mk  </p>
@@ -176,7 +176,7 @@
 <div class="widget tagcloud">
   <h3 class="title">Tag Cloud</h3>
   <div class="entry">
-    <a href="/tags/Makefile/" style="font-size: NaNpx;">Makefile</a><a href="/tags/OpenWrt/" style="font-size: NaNpx;">OpenWrt</a><a href="/tags/compile/" style="font-size: NaNpx;">compile</a><a href="/tags/hiwifi/" style="font-size: NaNpx;">hiwifi</a><a href="/tags/ipk/" style="font-size: NaNpx;">ipk</a><a href="/tags/package/" style="font-size: NaNpx;">package</a><a href="/tags/smart-router/" style="font-size: NaNpx;">smart router</a><a href="/tags/welcome/" style="font-size: NaNpx;">welcome</a>
+    <a href="/tags/Makefile/" style="font-size: 10.00px;">Makefile</a><a href="/tags/OpenWrt/" style="font-size: 20.00px;">OpenWrt</a><a href="/tags/compile/" style="font-size: 10.00px;">compile</a><a href="/tags/hiwifi/" style="font-size: 10.00px;">hiwifi</a><a href="/tags/ipk/" style="font-size: 10.00px;">ipk</a><a href="/tags/package/" style="font-size: 10.00px;">package</a><a href="/tags/smart-router/" style="font-size: 10.00px;">smart router</a><a href="/tags/welcome/" style="font-size: 10.00px;">welcome</a>
   </div>
 </div>
 
