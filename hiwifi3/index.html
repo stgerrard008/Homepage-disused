@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>package | GNosis Storm</title>
+  <title>Install the package on OpenWrt | GNosis Storm</title>
   <meta name="author" content="Chen Zhuo">
   
   <meta name="description" content="A Philobiblic Programmer&#39;s Inner Space">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Install the package on OpenWrt"/>
   <meta property="og:site_name" content="GNosis Storm"/>
 
   
@@ -46,25 +46,68 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">package</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-23T09:35:30.000Z"><a href="/hiwifi3/">Sep 23 2014</a></time>
+      
+      
+  
+    <h1 class="title">Install the package on OpenWrt</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>1.Flush the OpenWrt into your device (Please choose one of these boards or router from the <a href="http://wiki.openwrt.org/toh/start" target="_blank" rel="external">Table of Hardware</a>)</p>
+<p>2.Submit my <strong>ipk</strong> package to OpenWrt (We assume 192.168.1.1 as the default routine of the router)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>scp ./bin/ar71xxx/package/listener-<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.ipk root<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">1</span><span class="symbol">:/tmp</span></div></pre></td></tr></table></figure>
+
+<p>3.Install Putty and connect to router.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>sudo apt-get install putty</div><div class="line"><span class="variable">$ </span>putty</div></pre></td></tr></table></figure>
+
+<p>fill the routine with <strong>192.168.1.1</strong> and connect.</p>
+<p>4.Install the <strong>ipk</strong> package</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>cd /tmp</div><div class="line"><span class="variable">$ </span>opkg install listener-<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.ipk</div></pre></td></tr></table></figure>
 
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-09-19T20:00:30.000Z"><a href="/hiwifi2/">Sep 20 2014</a></time>
-            
-              <h1 class="title"><a href="/hiwifi2/">First Distribution to OpenWrt</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/OpenWrt/">OpenWrt</a>
   </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/OpenWrt/">OpenWrt</a>, <a href="/tags/putty/">putty</a>, <a href="/tags/opkg/">opkg</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -152,7 +195,7 @@ var disqus_shortname = 'chenzhuo';
   var dsq = document.createElement('script');
   dsq.type = 'text/javascript';
   dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>

@@ -97,7 +97,7 @@
 <p>7.Back to <strong>./package/[project-name]/</strong> directory and modify the <strong>Makefile</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">include $(TOPDIR)/rules.mk</div><div class="line"></div><div class="line"><span class="constant">PKG_NAME</span>:=listener</div><div class="line"><span class="constant">PKG_VERSION</span>:=0.0.1</div><div class="line"><span class="constant">PKG_BUILD_DIR</span>:=<span class="variable">$(BUILD_DIR)</span>/<span class="variable">$(PKG_NAME)</span>-<span class="variable">$(PKG_VERSION)</span></div><div class="line"></div><div class="line">include $(INCLUDE_DIR)/package.mk</div><div class="line"></div><div class="line">define Package/$(PKG_NAME)</div><div class="line"><span class="constant">SECTION</span>:=base</div><div class="line"><span class="constant">CATEGORY</span>:=Network</div><div class="line"><span class="constant">TITLE</span>:=listener</div><div class="line">endef</div><div class="line"></div><div class="line">define Build/Prepare</div><div class="line">		mkdir -p <span class="variable">$(PKG_BUILD_DIR)</span></div><div class="line">		<span class="variable">$(CP)</span> ./src/* <span class="variable">$(PKG_BUILD_DIR)</span>/</div><div class="line">endef</div><div class="line"></div><div class="line">define Package/$(PKG_NAME)/install</div><div class="line">		<span class="variable">$(INSTALL_DIR)</span> <span class="variable">$(1)</span>/bin</div><div class="line">		<span class="variable">$(INSTALL_BIN)</span> <span class="variable">$(PKG_BUILD_DIR)</span>/listener <span class="variable">$(1)</span>/bin/</div><div class="line">endef</div><div class="line"></div><div class="line">$(eval $(call BuildPackage,$(PKG_NAME)))</div></pre></td></tr></table></figure>
 
-<p>Note that every indentation must be a “tab” instead of 8 white-spaces in <strong>Makefile</strong></p>
+<p><strong><em>Tips:</em></strong> Note that every indentation must be a “tab” instead of 8 white-spaces in <strong>Makefile</strong></p>
 <p>8.Back to the root directory and make the </p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">make</span></div></pre></td></tr></table></figure>
 
@@ -164,7 +164,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/OpenWrt/">OpenWrt</a><small>2</small></li>
+    <li><a href="/categories/OpenWrt/">OpenWrt</a><small>3</small></li>
   
     <li><a href="/categories/others/">others</a><small>1</small></li>
   
@@ -176,7 +176,7 @@
 <div class="widget tagcloud">
   <h3 class="title">Tag Cloud</h3>
   <div class="entry">
-    <a href="/tags/Makefile/" style="font-size: 10.00px;">Makefile</a><a href="/tags/OpenWrt/" style="font-size: 20.00px;">OpenWrt</a><a href="/tags/compile/" style="font-size: 10.00px;">compile</a><a href="/tags/hiwifi/" style="font-size: 10.00px;">hiwifi</a><a href="/tags/ipk/" style="font-size: 10.00px;">ipk</a><a href="/tags/package/" style="font-size: 10.00px;">package</a><a href="/tags/smart-router/" style="font-size: 10.00px;">smart router</a><a href="/tags/welcome/" style="font-size: 10.00px;">welcome</a>
+    <a href="/tags/Makefile/" style="font-size: 10.00px;">Makefile</a><a href="/tags/OpenWrt/" style="font-size: 20.00px;">OpenWrt</a><a href="/tags/compile/" style="font-size: 10.00px;">compile</a><a href="/tags/hiwifi/" style="font-size: 10.00px;">hiwifi</a><a href="/tags/ipk/" style="font-size: 10.00px;">ipk</a><a href="/tags/opkg/" style="font-size: 10.00px;">opkg</a><a href="/tags/package/" style="font-size: 10.00px;">package</a><a href="/tags/putty/" style="font-size: 10.00px;">putty</a><a href="/tags/smart-router/" style="font-size: 10.00px;">smart router</a><a href="/tags/welcome/" style="font-size: 10.00px;">welcome</a>
   </div>
 </div>
 
@@ -185,6 +185,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/hiwifi3/">Install the package on OpenWrt</a>
+      </li>
     
       <li>
         <a href="/hiwifi2/">First Distribution to OpenWrt</a>
