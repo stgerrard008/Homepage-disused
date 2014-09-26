@@ -62,16 +62,22 @@
     </header>
     <div class="entry">
       
-        <p>1.Flush the OpenWrt into your device (Please choose one of these boards or router from the <a href="http://wiki.openwrt.org/toh/start" target="_blank" rel="external">Table of Hardware</a>)</p>
+        <h3 id="Preface">Preface</h3>
+<p>I have mentioned how to generate the <strong>ipk</strong> installer in my article <em>“First Distribution to OpenWrt”</em> (<a href="http://chenzhuo.me/hiwifi2/" target="_blank" rel="external">http://chenzhuo.me/hiwifi2/</a>). However it failed with a line of error text <strong>“line 1: syntax error: unexpected word (expecting “)”)”</strong> instead of normal operation while it does work on my PC. I soon realize that OpenWrt provides its own SDK. Therefore, I add a line to revise the <strong>GCC_PATH</strong> in Makefile and compile it again:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="constant">GCC_PATH</span>=/home/user/your_openwrt_path/bin/ar71xx/OpenWrt-SDK-ar71xx-for-linux-x86_64-gcc-4.6-linaro_uClibc-0.9.33.2/staging_dir/toolchain-mips_r2_gcc-4.6-linaro_uClibc-0.9.33.2/bin</div><div class="line"></div><div class="line">demo: demo.o</div><div class="line">	<span class="variable">$(GCC_PATH)</span>/mips-openwrt-linux-gcc <span class="variable">$(LDFLAGS)</span> demo.o -o demo</div><div class="line">demo.o: demo.c  </div><div class="line">	<span class="variable">$(GCC_PATH)</span>/mips-openwrt-linux-gcc <span class="variable">$(CFLAGS)</span> -c demo.c</div><div class="line"><span class="title">clean:  </span></div><div class="line">	rm *.o demo</div></pre></td></tr></table></figure>
+
+<h3 id="Main_Text">Main Text</h3>
+<p>If you have taken the remedy, the following step seems extraordinarily easy:</p>
+<p>1.Flush the OpenWrt into your device (Please choose one of these boards or router from the <a href="http://wiki.openwrt.org/toh/start" target="_blank" rel="external">Table of Hardware</a>)</p>
 <p>2.Submit my <strong>ipk</strong> package to OpenWrt (We assume 192.168.1.1 as the default routine of the router)</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>scp ./bin/ar71xxx/package/listener-<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.ipk root<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">1</span><span class="symbol">:/tmp</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>scp ./bin/ar71xxx/package/demo-<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.ipk root<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">1</span><span class="symbol">:/tmp</span></div></pre></td></tr></table></figure>
 
 <p><a id="more"></a><br>3.Install Putty and connect to router.</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>sudo apt-get install putty</div><div class="line"><span class="variable">$ </span>putty</div></pre></td></tr></table></figure>
 
-<p>fill the routine with <strong>192.168.1.1</strong> and connect.</p>
-<p>4.Install the <strong>ipk</strong> package</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>cd /tmp</div><div class="line"><span class="variable">$ </span>opkg install listener-<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.ipk</div></pre></td></tr></table></figure>
+<p>fill the routine with the current ip of your router( mostly 192.168.1.1 or 192.168.0.1 ) and connect.</p>
+<p>4.Install and run the package</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>cd /tmp</div><div class="line"><span class="variable">$ </span>opkg install demo-<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.ipk</div><div class="line"><span class="variable">$ </span>demo</div></pre></td></tr></table></figure>
 
 
       
